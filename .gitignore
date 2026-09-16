@@ -1,2 +1,7 @@
 .venv/
 .env
+valeursfoncieres-*
+/__init__*
+__init__*
+*.log
+*.pyc
