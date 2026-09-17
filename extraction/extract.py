@@ -1,15 +1,16 @@
 import logging
-from datetime import datetime
 from pathlib import Path
 from typing import Counter
 import pandas as pd
 import re
 import unicodedata
+from utils.utils import setup_logging
 
 from utils.minio_client import MinIOClient, upload_chunk
 
 
 BASE_DIR = Path(__file__).resolve().parent
+
 CHUNCK_SIZE=100_000
 
                 
@@ -86,21 +87,8 @@ def extract(folder: Path, year: int, expected_columns: list[str]) -> None:
     logger.info("End extraction for %s: %d parts, %d rows", year, parts, total_rows)
     
 
-def setup_logging(log_dir: Path) -> None:
-    """Logs dans un fichier daté et dans la console."""
-    log_dir.mkdir(parents=True, exist_ok=True)
-    log_file = log_dir / f"extraction-{datetime.today():%Y-%m-%d}.log"
- 
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s - %(message)s",
-        handlers=[
-            logging.FileHandler(log_file, encoding="utf-8"),
-            logging.StreamHandler(),
-        ],
-    )  
-    
+
 
 if __name__ == "__main__":
-    setup_logging(BASE_DIR / "log")
+    setup_logging(BASE_DIR / "log" , "extraction")
     extract(BASE_DIR / "raw", 2025, [])

@@ -86,8 +86,31 @@ class MinIOClient:
             logger.exception("Impossible de créer le bucket %s", self.bucket)
             raise
         logger.info("Bucket créé : %s", self.bucket)
+    
+    def list_keys(self , prefix : str): 
+        paginator = self.client.get_paginator("list_objects_v2")
+        keys = []
+        for page in paginator.paginate(Bucket = self.bucket , Prefix = prefix):
+            for object in page.get("Contents", []):
+                keys.append(object["Key"])
         
+        return sorted(keys)
+    
+    def get_object(self , key : str):
+        try:
+            content = self.client.get_object(Bucket = self.bucket , Key = key)
+        except:
+            raise
         
+        body = content["Body"] 
+        
+        try:
+            r = body.read()  
+        finally:
+            body.close()
+        
+        return r
+            
 def upload_chunk(client: MinIOClient, df: pd.DataFrame, year: int, part: int) -> str:
     buffer = io.BytesIO()
     df.to_parquet(buffer, index=False, engine="pyarrow")
