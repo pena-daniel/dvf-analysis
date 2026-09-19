@@ -4,7 +4,9 @@ from typing import Counter
 import pandas as pd
 import re
 import unicodedata
+from utils.data_columns import DVF_EXPECTED_COLUMNS
 from utils.utils import setup_logging
+
 
 from utils.minio_client import MinIOClient, upload_chunk
 
@@ -38,7 +40,7 @@ def build_column_mapping(columns: list[str]) -> dict[str, str]:
 
 
 def checking_existing_columns(file_name, expected_columns):
-    actuals_columns = pd.read_csv(file_name, sep=";", nrows=0).columns
+    actuals_columns = pd.read_csv(file_name, sep="|", nrows=0).columns
     
     for p in expected_columns:
         if p not in actuals_columns:
@@ -49,7 +51,7 @@ def checking_existing_columns(file_name, expected_columns):
 
 
 def read_large_file(file, chunck_size):
-    for d_chunck in pd.read_csv(file, sep=";", chunksize=chunck_size, dtype="str"):
+    for d_chunck in pd.read_csv(file, sep="|", chunksize=chunck_size, dtype="str"):
         yield d_chunck
     
 
@@ -91,4 +93,4 @@ def extract(folder: Path, year: int, expected_columns: list[str]) -> None:
 
 if __name__ == "__main__":
     setup_logging(BASE_DIR / "log" , "extraction")
-    extract(BASE_DIR / "raw", 2025, [])
+    extract(BASE_DIR / "raw", 2025, DVF_EXPECTED_COLUMNS)
