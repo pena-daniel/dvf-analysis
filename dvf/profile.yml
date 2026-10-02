@@ -1,0 +1,12 @@
+dvf:
+  outputs:
+    dev:
+      dbname: dvf
+      host: localhost
+      pass: postgres
+      port: 5432
+      schema: public
+      threads: 1
+      type: postgres
+      user: postgres
+  target: dev
