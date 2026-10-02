@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: dim_commune
+    columns:
+      - name: code_insee
+        tests:
+          - not_null
+          - unique
