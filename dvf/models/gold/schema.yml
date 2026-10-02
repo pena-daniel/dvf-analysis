@@ -8,6 +8,7 @@ models:
           - not_null
           - unique
   
+
   - name: dim_type_local
     columns:
       - name: type_local_key
@@ -27,6 +28,7 @@ models:
                 - "Local industriel. commercial ou assimilé"
                 - "Non renseigné"
 
+
       - name: categorie
         tests:
           - not_null
@@ -35,3 +37,15 @@ models:
                 - Habitation
                 - Autre 
                 - "Non renseigné"
+
+
+  - name: dim_nature_mutation
+    columns : 
+      - name: nature_mutation_key
+        tests:
+          - not_null
+          - unique
+      - name: nature_mutation
+        tests:
+          - not_null
+          - unique
