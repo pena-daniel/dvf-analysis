@@ -5,3 +5,4 @@ valeursfoncieres-*
 __init__*
 *.log
 *.pyc
+*/*/package-lock.*
