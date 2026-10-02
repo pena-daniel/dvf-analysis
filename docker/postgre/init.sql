@@ -48,7 +48,9 @@ CREATE TABLE IF NOT EXISTS bronze.dvf (
     nature_culture               text,
     nature_culture_speciale      text,
     surface_terrain              text,
-    annee                        integer NOT NULL
+    annee                        integer NOT NULL,
+    source_file                  text NOT NULL,
+    load_at                      timestamptz NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS idx_bronze_dvf_annee ON bronze.dvf (annee);

@@ -41,6 +41,8 @@ def load_to_pg(year:int) :
 
 			df["annee"] = str(year) 
 
+			df["source_file"] = str(key)
+
 			pg.insert_io_data(df)
 
 			
