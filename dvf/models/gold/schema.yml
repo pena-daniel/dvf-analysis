@@ -7,3 +7,31 @@ models:
         tests:
           - not_null
           - unique
+  
+  - name: dim_type_local
+    columns:
+      - name: type_local_key
+        tests:
+          - not_null
+          - unique
+
+      - name: type_local
+        tests:
+          - not_null
+          - unique
+          - accepted_values :
+              values:
+                - Appartement
+                - Maison
+                - Dépendance
+                - "Local industriel. commercial ou assimilé"
+                - "Non renseigné"
+
+      - name: categorie
+        tests:
+          - not_null
+          - accepted_values :
+              values:
+                - Habitation
+                - Autre 
+                - "Non renseigné"
