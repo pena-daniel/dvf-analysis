@@ -69,10 +69,18 @@ class MinIOClient:
     def _ensure_bucket_exists(self) -> None:
         """Vérifie que le bucket existe et le crée sinon (confort en local)."""
         try:
+            # print(self.client)
+            print("endpoint :", self.client.meta.endpoint_url)
+            print("addressing :", self.client.meta.config.s3)
+            print("bucket :", repr(self.bucket))  # repr révèle espaces / \n
+            print(self.client.list_buckets()["Buckets"])  # teste connexion + auth sans bucket
             self.client.head_bucket(Bucket=self.bucket)
             logger.info("Bucket trouvé : %s", self.bucket)
             return
         except ClientError as exc:
+            headers = exc.response["ResponseMetadata"]["HTTPHeaders"]
+            print(headers.get("x-amz-bucket-region"))
+            print(exc.response["Error"])
             if self._error_code(exc) not in ("404", "NoSuchBucket"):
                 logger.exception("Impossible de vérifier le bucket %s", self.bucket)
                 raise
