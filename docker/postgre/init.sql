@@ -1,5 +1,6 @@
 -- Exécuté uniquement au premier démarrage (volume dwh-data vide)
 
+
 -- Couche bronze : données DVF brutes, tout en text.
 -- Le typage est fait dans silver avec dbt.
 CREATE SCHEMA IF NOT EXISTS bronze;
@@ -50,7 +51,7 @@ CREATE TABLE IF NOT EXISTS bronze.dvf (
     surface_terrain              text,
     annee                        integer NOT NULL,
     source_file                  text NOT NULL,
-    load_at                      timestamptz NOT NULL DEFAULT now()
+    loaded_at                    timestamptz NOT NULL DEFAULT now()
 );
 
 CREATE INDEX IF NOT EXISTS idx_bronze_dvf_annee ON bronze.dvf (annee);
