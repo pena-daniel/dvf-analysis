@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dvf
+  - name: silver_dvf
     columns:
       - name: id
         tests:

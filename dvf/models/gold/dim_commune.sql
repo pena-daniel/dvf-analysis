@@ -1,6 +1,6 @@
  with libelles as (
  select code_insee , code_departement , code_commune , libelle_commune , count(*) as nb_transaction 
- from {{ref('dvf')}}
+ from {{ref('silver_dvf')}}
  group by 1 , 2, 3 ,4
  ), 
  classement as (

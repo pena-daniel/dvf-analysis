@@ -2,7 +2,7 @@ with types_local as (
     select 
         code_type_local,
         type_local
-    from {{ ref('dvf') }}
+    from {{ ref('silver_dvf') }}
     group by code_type_local,type_local
 )
 
