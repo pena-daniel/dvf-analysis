@@ -49,3 +49,68 @@ models:
         tests:
           - not_null
           - unique
+
+
+  - name: fct_bien
+    columns :
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+
+      - name: mutation_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_mutation')
+              field: mutation_key
+
+      - name: code_insee
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_commune')
+              field: code_insee 
+    
+      - name: type_local_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_type_local')
+              field: type_local_key
+
+      - name: bien_key
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_mutation
+    columns :
+      - name: nature_mutation_key
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_nature_mutation')
+              field: nature_mutation_key
+
+      - name: mutation_key
+        tests:
+          - not_null
+          - unique
+
+      - name: code_insee
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_commune')
+              field: code_insee
+
+      - name: date_key
+        tests: 
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_key
+
