@@ -6,3 +6,6 @@ __init__*
 *.log
 *.pyc
 */*/package-lock.*
+.user.*
+profiles.yml
+*.pbix

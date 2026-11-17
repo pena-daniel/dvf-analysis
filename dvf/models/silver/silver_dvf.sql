@@ -33,6 +33,6 @@ select
 
     annee,
     source_file,
-    load_at as load_date
+    loaded_at as load_date
 
 from with_numerote
